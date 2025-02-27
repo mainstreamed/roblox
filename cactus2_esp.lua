@@ -16,14 +16,7 @@ local targets = {
       'Cactus2';
 };
 
-local entityList;
-for _, v in getgc() do
-      if (type(v) == 'function' and debug.info(v, 'n') == 'GetEntityFromPart') then
-            entityList = debug.getupvalue(v, 1);
-            break;
-      end;
-end;
-
+local entityList = getrenv()._G.classes.EntityClient.EntityMap;
 local runservice  = game:GetService('RunService');
 
 
