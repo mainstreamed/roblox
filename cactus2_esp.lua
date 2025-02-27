@@ -59,14 +59,20 @@ local funcs = {
             local connection1, connection2;
 
             connection1 = runservice.RenderStepped:Connect(function()
+                  
+                  local shown = 0;      
                   local points = {};
                   for i = 1, #offsets do
                         local vector3 = offsets[i];
                         local point, os = camera:WorldToViewportPoint(vector3);
-                        if (not os) then
-                              return hidedrawings();
+                        if (os) then
+                              shown += 1;
                         end;
                         points[i] = Vector2.new(point.X, point.Y);
+                  end;
+
+                  if (shown == 0) then
+                        return hidedrawings();
                   end;
 
                   for i = 1, #drawings do
